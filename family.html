@@ -1,0 +1,238 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Background</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        border: none;
+        outline: none;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      html {
+        font-size: 62.5%;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        background: linear-gradient(45deg, #4B001A, #990F3D, #D97787, #E5ADA8, #EEB9B8, #E5ADA8, #D97787, #990F3D, #4B001A);
+        background-size: 400% 400%;
+        animation: gradientShift 5s ease infinite;
+        color: white;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      header {
+        margin-top: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem 9%;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+      }
+
+      nav a {
+        font-size: 1.8rem;
+        color: white;
+        margin-left: 4rem;
+        font-weight: 500;
+        transition: 0.3s ease;
+        border-bottom: 3px solid transparent;
+      }
+
+      nav a:hover, nav a.active {
+        color: #b74b4b;
+        border-bottom: 3px solid #b74b4b;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+        margin-top: 0;
+        margin-bottom: 2rem;
+        color: #b74b4b;
+        text-align: center;
+        padding-top: 8rem;
+        text-shadow: 2px 2px 5px rgba(248, 172, 220, 0.5);
+      }
+
+      .family-tree {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .box {
+        perspective: 1000px;
+        width: 350px;
+        height: 350px;
+      }
+
+      .inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+      }
+
+      .box:hover .inner {
+        transform: rotateY(180deg);
+      }
+
+      .front, .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .front img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .back {
+        background: #b74b4b;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: rotateY(180deg);
+        text-align: center;
+        padding: 2rem;
+        font-size: 2rem; /* Pinalaki mula sa 1.4rem */
+        border-radius: 10px;
+      }
+
+      .back p {
+        font-size: 2rem; /* Pinalaki ang font ng impormasyon */
+        margin: 1rem 0; /* Nagdagdag ng margin para magkalayo ang mga linya */
+      }
+
+      .info-label {
+        font-weight: bold;
+        font-size: 2.2rem; /* Mas malaki upang tumayo ang label */
+      }
+
+      @media (max-width: 768px) {
+        .box {
+          width: 200px;
+          height: 200px;
+        }
+
+        .back p {
+          font-size: 1.6rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <header>
+      <nav>
+        <a href="abe.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="family.html">Family Background</a>
+        <a href="education.html">Educational Attainment</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="gallery.html">Photo Gallery</a>
+      </nav>
+    </header>
+
+    <h1>Family Background</h1>
+
+    <div class="family-tree">
+
+      <!-- Parent 1 -->
+      <div class="box">
+        <div class="inner">
+          <div class="front">
+            <img src="papa.jpg" alt="Father">
+          </div>
+          <div class="back">
+            <p><span class="info-label">Name:</span> Noremil O. Padulip </p>
+            <p><span class="info-label">Relation:</span> Father </p>
+            <p><span class="info-label">Birthday:</span> January 30, 1970</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parent 2 -->
+      <div class="box">
+        <div class="inner">
+          <div class="front">
+            <img src="mama.jpg" alt="Mother">
+          </div>
+          <div class="back">
+            <p><span class="info-label">Name:</span> Dorothy S. Padulip </p>
+            <p><span class="info-label">Relation:</span> Mother </p>
+            <p><span class="info-label">Birthday:</span> February 8, 1971 </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Child 1 -->
+      <div class="box">
+        <div class="inner">
+          <div class="front">
+            <img src="daryll.jpg" alt="Brother">
+          </div>
+          <div class="back">
+            <p><span class="info-label">Name:</span> Christian Daryll S. Padulip </p>
+            <p><span class="info-label">Relation:</span> Brother </p>
+            <p><span class="info-label">Birthday:</span> November 6, 1997 </p>
+            <p> Bachelor in Secondary Education Major in Technology and Livelihood Education </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Child 2 -->
+      <div class="box">
+        <div class="inner">
+          <div class="front">
+            <img src="dean.jpg" alt="Sister">
+          </div>
+          <div class="back">
+            <p><span class="info-label">Name:</span> Dean Jersey S. Padulip</p>
+            <p><span class="info-label">Relation:</span> Brother </p>
+            <p><span class="info-label">Birthday:</span> March 29, 1999 </p>
+            <p> Graduated with a Bachelor of Science in Computer Science </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+  </html>
