@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+      font-size: 62.5%;
+    }
+
+    body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #4B001A, #990F3D, #D97787, #E5ADA8, #EFC3CA, #E5ADA8, #D97787, #990F3D, #4B001A);
+    background-size: 400% 400%;
+    animation: gradientShift 5s ease infinite;
+    color: white;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
+    header {
+      position: fixed;
+      top: 2rem;
+      left: 0;
+      width: 100%;
+      padding: 2rem 9%;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      transition: top 0.3s ease-in-out;
+    }
+
+    nav a {
+      font-size: 1.8rem;
+      color: white;
+      margin-left: 4rem;
+      font-weight: 500;
+      transition: 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #b74b4b;
+      border-bottom: 3px solid #b74b4b;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: white;
+      padding-top: 6rem;
+    }
+
+    h1 {
+            color: white;
+            text-shadow: 2px 2px 5px rgba(248, 172, 220, 0.5);
+        }
+
+    .favorites-section {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    /* Movie, Food, Drink, and Place Cards */
+    .movie-card, .food-card, .drink-card, .place-card {
+      width: 200px;
+      height: 330px;
+      background-color: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease, border 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border: 4px solid transparent; 
+    }
+
+    .movie-card:hover, .food-card:hover, .drink-card:hover, .place-card:hover {
+      transform: scale(1.05);
+      border: 4px solid transparent; 
+      animation: rgbBorder 3s infinite;
+    }
+
+    @keyframes rgbBorder {
+      0% { border-color: #ff0000; }
+      25% { border-color: #00ff00; }
+      50% { border-color: #0000ff; }
+      75% { border-color: #ffff00; }
+      100% { border-color: #ff0000; }
+    }
+
+    .movie-card img, .food-card img, .drink-card img, .place-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info {
+      padding: 15px;
+      text-align: center;
+      background-color: #b74b4b;
+      color: white;
+      font-size: 1.4rem;
+      border-top: 2px solid white;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .movie-card:hover .info, .food-card:hover .info, .drink-card:hover .info, .place-card:hover .info {
+      opacity: 1;
+    }
+
+    .buttons-container {
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      background-color: #f7b8d2; 
+      border-radius: 4rem;
+      font-size: 1.6rem;
+      color: #b74b4b;
+      letter-spacing: 0.3rem;
+      font-weight: 600;
+      border: 2px solid #b74b4b;
+      transition: 0.3s ease;
+      cursor: pointer;
+      margin: 1rem; /* Added spacing around buttons */
+    }
+
+    .btn:hover {
+      transform: scale(1.03);
+      background-color: #b74b4b; /* Darker pink for hover */
+      color: white;
+      box-shadow: 0 0 25px #f7b8d2; /* Soft Coquette glow effect */
+    }
+
+    .content {
+  margin-top: 20px;
+  font-size: 1.8rem;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease; /* Make the transition smoother */
+}
+
+.content.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Individual card fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease forwards; 
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    .hidden {
+      display: none;
+    }
+
+    /* Movie Section as a photo card */
+    .movie-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.movie-card {
+  width: 200px;
+  height: 330px;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative; /* Para ma-position ang info */
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-card .info {
+  padding: 15px;
+  text-align: center;
+  background-color:pink;
+  color: white;
+  font-size: 1.4rem;
+  border-top: 2px solid transparent;
+  position: absolute; /* Para ma-position sa ibaba */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0; /* Nakatago muna ang info */
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .info {
+  opacity: 1; /* Lalabas ang info kapag naka-hover */
+}
+
+    /* Food Section as a photo card */
+    .food-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.food-card {
+  width: 200px;
+  height: 330px;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: relative; /* Add this to position the info absolutely */
+}
+
+.food-card:hover {
+  transform: scale(1.05);
+}
+
+.food-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.food-card .info {
+  padding: 15px;
+  text-align: center;
+  background-color:pink;
+  color: white;
+  font-size: 1.4rem;
+  border-top: 2px solid transparent;
+  position: absolute; /* Para ma-position sa ibaba */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0; /* Nakatago muna ang info */
+  transition: opacity 0.3s ease;
+}
+
+.food-card:hover .info {
+  opacity: 1; /* Show info on hover */
+}
+
+    .playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid #f7b8d2;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .song {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.song img.song-image {
+  width: 100px;  /* Increased size */
+  height: 100px; /* Increased size */
+  margin-right: 20px; /* Adds space between the image and song info */
+  animation: zoomInOut 3s infinite; /* Applying the animation */
+}
+
+/* @keyframes animation for zoom effect */
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1); /* Initial size */
+  }
+  50% {
+    transform: scale(1.2); /* Zoom in */
+  }
+  100% {
+    transform: scale(1); /* Return to original size */
+  }
+}
+
+.song-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+
+  .title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #b74b4b;
+  }
+
+  .artist {
+    font-size: 1.4rem;
+    color: #555;
+  }
+
+  audio {
+    flex-shrink: 0;
+  }
+
+  /* Drink Cards */
+  .drink-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.drink-card {
+  width: 200px;
+  height: 330px;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  position: relative; /* Add this to position the info absolutely */
+}
+
+.drink-card:hover {
+  transform: scale(1.05);
+}
+
+.drink-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.drink-card .info {
+  padding: 15px;
+  text-align: center;
+  background-color:pink;
+  color: white;
+  font-size: 1.4rem;
+  border-top: 2px solid transparent;
+  position: absolute; /* Para ma-position sa ibaba */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0; /* Nakatago muna ang info */
+  transition: opacity 0.3s ease;
+}
+
+.drink-card:hover .info {
+  opacity: 1; /* Show info on hover */
+}
+
+/* Place Section as a photo card */
+.place-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.place-card {
+  width: 200px;
+  height: 330px;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.place-card:hover {
+  transform: scale(1.05);
+}
+
+.place-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.place-card .info {
+  padding: 15px;
+  text-align: center;
+  background-color:pink;
+  color: white;
+  font-size: 1.4rem;
+  border-top: 2px solid transparent;
+  position: absolute; /* Para ma-position sa ibaba */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0; /* Nakatago muna ang info */
+  transition: opacity 0.3s ease;
+}
+
+.place-card:hover .info {
+  opacity: 1;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="abe.html">Home</a>
+      <a href="about.html">About Me</a>
+      <a href="family.html">Family Background</a>
+      <a href="education.html">Educational Attainment</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="gallery.html">Photo Gallery</a>
+    </nav>
+  </header>
+  
+  <section class="favorites-section">
+    <h1 style="color: #b74b4b;">My Favorite Things</h1>
+
+    <div class="buttons-container">
+      <button class="btn" onclick="showContent('music')">Music</button>
+      <button class="btn" onclick="showContent('movie')">Movie</button>
+      <button class="btn" onclick="showContent('food')">Food</button>
+      <button class="btn" onclick="showContent('drinks')">Drinks</button>
+      <button class="btn" onclick="showContent('place')">Place</button>
+    </div>
+
+    <div class="content hidden" id="music">
+      <h3>My Playlist</h3>
+      <div class="playlist">
+        <!-- Song 1 -->
+        <div class="song">
+          <img src="sza.jpg" alt="Blinding Lights" class="song-image">
+          <div class="song-info">
+            <p class="title"> Good Days</p>
+            <p class="artist">SZA</p>
+          </div>
+          <audio controls>
+            <source src="SZA - Good Days.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+    
+        <!-- Song 2 -->
+        <div class="song">
+          <img src="saturn.png" alt="Levitating" class="song-image">
+          <div class="song-info">
+            <p class="title">Saturn</p>
+            <p class="artist">SZA</p>
+          </div>
+          <audio controls>
+            <source src="SZA - Saturn.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+    
+        <!-- Song 3 -->
+        <div class="song">
+          <img src="frank.jpg" alt="Watermelon Sugar" class="song-image">
+          <div class="song-info">
+            <p class="title">Godspeed</p>
+            <p class="artist">Frank Ocean</p>
+          </div>
+          <audio controls>
+            <source src="Frank Ocean - Godspeed.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="song">
+          <img src="daniel.jpg" alt="Watermelon Sugar" class="song-image">
+          <div class="song-info">
+            <p class="title">Japanese Denim</p>
+            <p class="artist">Daniel Caesar</p>
+          </div>
+          <audio controls>
+            <source src="Daniel Caesar - Japanese Denim.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="song">
+          <img src="billie.jpg" alt="Watermelon Sugar" class="song-image">
+          <div class="song-info">
+            <p class="title">WILDFLOWER</p>
+            <p class="artist">Billie Eilish</p>
+          </div>
+          <audio controls>
+            <source src="Billie Eilish - WILDFLOWER.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="content hidden" id="movie">
+      <div class="movie-cards">
+        <!-- Movie Card 1 -->
+        <div class="movie-card">
+          <img src="Moana.jpg" alt="Moana">
+          <div class="info">
+            <h4>Moana</h4>
+          </div>
+        </div>
+
+        <!-- Movie Card 2 -->
+        <div class="movie-card">
+          <img src="SWDBS.jpg" alt="SWDBS">
+          <div class="info">
+            <h4>Strong Woman Do Bong Soon</h4>
+          </div>
+        </div>
+
+        <!-- Movie Card 3 -->
+        <div class="movie-card">
+          <img src="Doctor Romantic.jpg" alt="Doctor Romantic">
+          <div class="info">
+            <h4>Doctor Romantic</h4>
+          </div>
+        </div>
+
+        <!-- Movie Card 4 -->
+        <div class="movie-card">
+          <img src="alchemy.jpg" alt="Alchemy">
+          <div class="info">
+            <h4>Alchemy of Souls</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content hidden" id="food">
+      <div class="food-cards">
+        <!-- Food Card 1 -->
+        <div class="food-card">
+          <img src="fries.jpg" alt="Fries">
+          <div class="info">
+            <h4>Fries</h4>
+          </div>
+        </div>
+
+        <!-- Food Card 2 -->
+        <div class="food-card">
+          <img src="cheese pizza.jpg" alt="Cheese pizza">
+          <div class="info">
+            <h4>Cheese Pizza</h4>
+          </div>
+        </div>
+
+        <!-- Food Card 3 -->
+        <div class="food-card">
+          <img src="mcdo.jpg" alt="Mcdonalds">
+          <div class="info">
+            <h4>Mcdonalds</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content hidden" id="drinks">
+      <div class="drink-cards">
+        <!-- Drink Card 1 -->
+        <div class="drink-card" onclick="showDrinkInfo('latte')">
+          <img src="coffee.jpg" alt="Coffee">
+          <div class="info">
+            <h4>Coffee</h4>
+          </div>
+        </div>
+    
+        <!-- Drink Card 2 -->
+        <div class="drink-card" onclick="showDrinkInfo('lemonade')">
+          <img src="coke.jpg" alt="Coke">
+          <div class="info">
+            <h4>Coke</h4>
+          </div>
+        </div>
+    
+        <!-- Drink Card 3 -->
+        <div class="drink-card" onclick="showDrinkInfo('greentea')">
+          <img src="matcha.jpg" alt="Matcha">
+          <div class="info">
+            <h4>Matcha</h4>
+          </div>
+        </div>
+
+        <!-- Drink Card 4 -->
+        <div class="drink-card" onclick="showDrinkInfo('greentea')">
+          <img src="mogu.jpg" alt="Mogu Mogu">
+          <div class="info">
+            <h4>Mogu Mogu</h4>
+          </div>
+        </div>
+
+        <!-- Drink Card 5 -->
+        <div class="drink-card" onclick="showDrinkInfo('greentea')">
+          <img src="iced tea.jpg" alt="Iced Tea">
+          <div class="info">
+            <h4>Iced Tea</h4>
+          </div>
+        </div>
+      </div>
+    
+      <div id="latte" class="drink-info hidden">
+        <h4>Latte</h4>
+        <p>A smooth blend of espresso and steamed milk, perfect for a relaxing break.</p>
+      </div>
+    
+      <div id="lemonade" class="drink-info hidden">
+        <h4>Lemonade</h4>
+        <p>Refreshing and tangy, made with freshly squeezed lemons.</p>
+      </div>
+    
+      <div id="greentea" class="drink-info hidden">
+        <h4>Green Tea</h4>
+        <p>Refreshing and calming, a healthy choice for any time of day.</p>
+      </div>
+    </div>
+    
+
+    <!-- Place Section -->
+<div class="content hidden" id="place">
+  <div class="place-cards">
+    <!-- Place Card 1 -->
+    <div class="place-card">
+      <img src="seoul.jpg" alt="Seoul">
+      <div class="info">
+        <h4>Seoul, South Korea</h4>
+      </div>
+    </div>
+
+    <!-- Place Card 2 -->
+    <div class="place-card">
+      <img src="switzerland.jpg" alt="Switzerland">
+      <div class="info">
+        <h4>Switzerland</h4>
+      </div>
+    </div>
+
+    <!-- Place Card 3 -->
+    <div class="place-card">
+      <img src="japan.jpg" alt="Japan">
+      <div class="info">
+        <h4>Japan</h4>
+      </div>
+    </div>
+  </div>
+</div>
+  </section>
+
+  <script>
+
+function showContent(contentId) {
+  const sections = document.querySelectorAll('.content');
+  sections.forEach(section => {
+    section.classList.add('hidden'); // Hide all contents
+    section.classList.remove('show'); // Remove the "show" class
+  });
+
+  const activeContent = document.getElementById(contentId);
+  activeContent.classList.remove('hidden'); // Show the target content
+  
+  setTimeout(() => {
+    activeContent.classList.add('show'); // Add "show" to trigger fade-in
+    // Add fade-in to each individual child box within the active content
+    const boxes = activeContent.querySelectorAll('.movie-card, .food-card, .drink-card, .place-card, .song');
+    boxes.forEach((box, index) => {
+      box.style.animationDelay = `${index * 0.2}s`; // Staggered delay for each card
+      box.classList.add('fade-in'); // Add the fade-in class
+    });
+  }, 10);
+}
+
+
+    // Ensure only one audio element plays at a time
+    document.querySelectorAll('audio').forEach(audio => {
+      audio.addEventListener('play', () => {
+        document.querySelectorAll('audio').forEach(otherAudio => {
+          if (otherAudio !== audio) {
+            otherAudio.pause();
+            otherAudio.currentTime = 0; // Optional
+          }
+        });
+      });
+    });
+  
+    function showContent(contentId) {
+      const sections = document.querySelectorAll('.content');
+      sections.forEach(section => {
+        section.classList.add('hidden');
+      });
+  
+      const activeContent = document.getElementById(contentId);
+      activeContent.classList.remove('hidden');
+      setTimeout(() => activeContent.classList.add('show'), 10);
+    }
+
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        header.style.top = '-100px'; // Hide header
+      } else {
+        header.style.top = '0'; // Show header
+      }
+
+      // Add class for styling
+      if (scrollTop > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+
+      lastScrollTop = scrollTop;
+    });
+
+    function showDrinkInfo(drinkId) {
+  const drinkInfos = document.querySelectorAll('.drink-info');
+  drinkInfos.forEach(info => {
+    info.classList.remove('show');
+  });
+
+  const activeDrinkInfo = document.getElementById(drinkId);
+  activeDrinkInfo.classList.add('show');
+}
+  </script>
+  
+</body>
+</html>
