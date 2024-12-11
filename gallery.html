@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+      font-size: 62.5%;
+    }
+    
+    body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 20vh;
+    background: linear-gradient(45deg, #4B001A, #990F3D, #D97787, #E5ADA8, #EEB9b8, #E5ADA8, #D97787, #990F3D, #4B001A);
+    background-size: 400% 400%;
+    animation: gradientShift 5s ease infinite;
+    color: white;
+}
+
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+    header {
+      position: fixed;
+      top: 2rem;
+      left: 0;
+      width: 100%;
+      padding: 2rem 9%;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      transition: top 0.3s ease-in-out;
+    }
+
+    nav a {
+      font-size: 1.8rem;
+      color: white;
+      margin-left: 4rem;
+      font-weight: 500;
+      transition: 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #b74b4b;
+      border-bottom: 3px solid #b74b4b;
+    }
+
+    h1 {
+      font-size: 4rem;
+     
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #b74b4b;
+      padding-top: 12rem;
+    }
+
+    .container {
+            background-color:transparent;
+            padding: 90px;
+            
+            
+
+        }
+
+        h1, h2 {
+            color: white;
+            text-shadow: 2px 2px 5px rgba(248, 172, 220, 0.5);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+
+        p {
+            color: #333;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+
+        .modal .close {
+            position: absolute;
+            top: 0px;
+            right: 20px;
+            font-size: 2em;
+            color: white;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .container {
+    background-color:transparent;
+    padding: 0; /* Alisin ang padding */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    flex: 1;
+    max-width: calc(25% - 15px);
+    margin: 0; /* Alisin ang margin */
+}
+
+img {
+    width: 100%; 
+    height: auto; 
+    display: block; /* Tanggalin ang extra space sa ilalim ng img */
+}
+
+.face1 {
+    position: relative;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    z-index: 1;
+    transform: translateY(0); /* Ginawang 0 para mawala ang offset na dati ay 100px */
+}
+
+.face2 {
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transform: translateY(0); /* Dati ay -100px, ginawa naming 0 */
+}
+
+.card:hover .face.face1{
+    transform: translateY(0);
+    box-shadow: inset 0 0 60px whitesmoke,
+    inset 20px 0 80px #f0f,
+    inset -20px 0 80px #0ff,
+    inset 20px 0 300px #f0f,
+    inset -20px 0 300px #0ff,
+    0 0 50px #fff,
+    -10px 0 80px #f0f,
+    10px 0 80px #0ff;
+}
+
+.outer{
+    opacity: .3;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.card:hover .outer{
+    opacity: 1;
+}
+
+.card:hover .face.face2{
+    transform: translateY(0);
+}
+
+img{
+    width: 300px;
+    height: 400px;
+}
+
+
+.title{
+    position: absolute;
+    top: 135px;
+    color: #fff;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="abe.html">Home</a>
+      <a href="about.html">About Me</a>
+      <a href="family.html">Family Background</a>
+      <a href="education.html">Educational Attainment</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="gallery.html">Photo Gallery</a>
+    </nav>
+  </header>
+
+  <section class="gallery-section">
+    <h1 style="color: #b74b4b;">My Gallery</h1>
+
+  <div class="container">
+    <!-- First Row -->
+    <div class="card">
+        <div class="face face1">
+            <div class="outer">
+                
+                <img src="ariana.jpg" alt="">
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="inner">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="face face1">
+            <div class="outer">
+                
+                <img src="k.jpg" alt="">
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="inner">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="face face1">
+            <div class="outer">
+                
+                <img src="hahaaz.jpg" alt="">
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="inner">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="face face1">
+            <div class="outer">
+                
+                <img src="uwu.jpg" alt="">
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="inner">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="card">
+        <div class="face face1">
+            <div class="outer">
+                
+                <img src="uwuka.jpg" alt="">
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="inner">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="face face1">
+            <div class="outer">
+                
+                <img src="sanka.jpg" alt="">
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="inner">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="face face1">
+            <div class="outer">
+                
+                <img src="childhood.jpg" alt="">
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="inner">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="face face1">
+            <div class="outer">
+                
+                <img src="g11.jpg" alt="">
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="inner">
+
+            </div>
+        </div>
+    </div>
+
+  <script>
+    function openModal(img) {
+            // Set the src of the modal image to the clicked image
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = img.src;
+            modal.style.display = 'flex'; // Show the modal
+        }
+
+        function closeModal() {
+            // Close the modal
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        header.style.top = '-100px'; // Hide header
+      } else {
+        header.style.top = '0'; // Show header
+      }
+      lastScrollTop = scrollTop;
+    });
+  </script>
+</body>
+</html>
