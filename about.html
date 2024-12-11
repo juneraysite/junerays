@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me - Averil Noreen Padulip</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+    
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+      font-size: 62.5%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      background: linear-gradient(45deg, #4B001A, #990F3D, #D97787, #E5ADA8, #EEB9b8, #E5ADA8, #D97787, #990F3D, #4B001A);
+      background-size: 400% 400%;
+      animation: gradientShift 5s ease infinite;
+      color: white;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Header and Navigation Bar */
+    header {
+      margin-top: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 9%;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      transition: top 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    }
+
+    nav a {
+      font-size: 1.8rem;
+      color: white;
+      margin-left: 4rem;
+      font-weight: 500;
+      transition: 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #b74b4b;
+      border-bottom: 3px solid #b74b4b;
+    }
+
+    /* About Section */
+    .about-section {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image {
+      flex: 0 1 400px;
+      margin-right: 2rem; 
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+
+    .about-image img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 50%; 
+      cursor: pointer;
+    }
+
+    .about-text {
+      flex: 1;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+      font-size: 2rem;
+      line-height: 1.8;
+    }
+
+    .about-text h2 {
+      font-size: 6rem; 
+      margin-bottom: 1rem;
+      color: #b74b4b;
+      text-shadow: 2px 2px 5px rgba(248, 172, 220, 0.5);
+    }
+
+    .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      visibility: hidden;
+      padding: 10px;
+      border-radius: 10px;
+      color: white;
+      text-align: left;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .center-text h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #b74b4b;
+    }
+
+    .center-text p {
+      font-size: 2rem;
+    }
+
+    .about-section.active .center-text {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Active Animation */
+    .about-section.active .about-image {
+      transform: translateX(-150%);
+      opacity: 0;
+    }
+
+    .about-section.active .about-text {
+      transform: translateX(150%);
+      opacity: 0;
+    }
+
+    .about-section.active .center-text {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Styling Bullet Points */
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    li {
+      font-size: 1.8rem;
+      line-height: 2.5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="abe.html">Home</a>
+      <a href="about.html">About Me</a>
+      <a href="family.html">Family Background</a>
+      <a href="education.html">Educational Attainment</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="gallery.html">Photo Gallery</a>
+    </nav>
+  </header>
+  
+  <section class="about-section" id="aboutSection">
+    <div class="about-image">
+      <img src="jr.jpg" alt="Averil Noreen Padulip" onclick="showCenterText()" />
+    </div>
+    <div class="about-text">
+      <h2>About Me</h2>
+      <p>Hi, I'm Averil Noreen Padulip, a passionate and driven BSIT student at SD 1C. I specialize in web development, focusing on creating innovative digital solutions. I love exploring new technologies and am eager to continue growing in the field of technology.</p>
+      <p>Click the picture to learn more about me!</p>
+    </div>
+    <div class="center-text" id="centerText">
+      <h2>More About Me</h2>
+      <ul>
+        <ul>
+          <li><strong>Birth Date:</strong> June 26, 2006</li>
+          <li><strong>Gender:</strong> Female</li>
+          <li><strong>Height:</strong> 5'1"</li>
+          <li><strong>Weight:</strong> 38</li>
+          <li><strong>Citizenship:</strong> Filipino</li>
+          <li><strong>Religion:</strong> Catholic</li>
+        </ul>
+      </ul>
+      <p>Click anywhere to go back!</p>
+    </div>
+  </section>
+
+  <script>
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        header.style.top = '-100px'; 
+      } else {
+        header.style.top = '0'; 
+      }
+
+      if (scrollTop > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+
+      lastScrollTop = scrollTop;
+    });
+
+    function showCenterText() {
+      const aboutSection = document.getElementById('aboutSection');
+      aboutSection.classList.toggle('active');
+    }
+
+    document.getElementById('centerText').addEventListener('click', () => {
+      const aboutSection = document.getElementById('aboutSection');
+      aboutSection.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
